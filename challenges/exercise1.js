@@ -38,6 +38,7 @@ export function hasMPostCode(person) {
 	// Your code here!
 	const postCode = person.address.postCode;
 	const firstHalfPostCode = postCode.substring(0,postCode.indexOf(' '));
+	//check for M followed by number regex
 	
 
 }
