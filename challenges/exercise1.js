@@ -23,7 +23,7 @@ export function getBusNumbers(people) {
 }
 
 export function countSheep(array) {
-	if (arr === undefined) throw new Error('arr is required');
+	if (array === undefined) throw new Error('array is required');
 	// Your code here!
 	let sheepCount = 0;
 	for(let i=0;i<array.length;i++){
@@ -38,7 +38,11 @@ export function hasMPostCode(person) {
 	// Your code here!
 	const postCode = person.address.postCode;
 	const firstHalfPostCode = postCode.substring(0,postCode.indexOf(' '));
-	//check for M followed by number regex
+	//check for M followed by number
+	if(firstHalfPostCode[0] === 'M' && /\d/.test(firstHalfPostCode[1])){
+		return true;
+	}
+	return false;
 	
 
 }
