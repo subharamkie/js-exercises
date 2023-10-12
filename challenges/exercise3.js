@@ -1,110 +1,102 @@
-export function findSmallNums(nums) {
-	if (!nums) throw new Error('nums is required');
-	// Your code here
-	const arrayLessThanOne = [];
-	for(let i =0;i<nums.length;i++){
-		if(typeof nums[i] !== 'string' && nums[i]<1){
-			arrayLessThanOne.push(nums[i]);
-		}
-	}
-	return arrayLessThanOne;
-
+export function findSmallNums(numbers) {
+  if (!numbers) throw new Error("nums is required");
+  const arrayLessThanOne = [];
+  numbers.forEach(function (num) {
+    if (typeof num !== "string" && num < 1) {
+      arrayLessThanOne.push(num);
+    }
+  });
+  return arrayLessThanOne;
 }
 
 export function findNamesBeginningWith(names, firstChar) {
-	if (!names) throw new Error('names is required');
-	if (!firstChar) throw new Error('char is required');
-	// Your code here
-	const namesArray = [];
-	for(let i=0;i<names.length;i++){
-		if(names[i].startsWith(firstChar)){
-			namesArray.push(names[i]);
-		}
-	}
-	return namesArray;
+  if (!names) throw new Error("names is required");
+  if (!firstChar) throw new Error("char is required");
+  const namesArray = [];
+  names.forEach(function (name) {
+    let nameArr = name.split("");
+    nameArr.forEach(function (character) {
+      if (character === firstChar) {
+        namesArray.push(name);
+      }
+    });
+  });
+  return namesArray;
 }
 
 export function findVerbs(words) {
-	if (!words) throw new Error('words is required');
-	// Your code here
-	const verbs = [];
-	for(let i=0;i<words.length;i++){
-		if(words[i].startsWith('to ')){ //to followed by space
-			verbs.push(words[i]);
-		}
-	}
-	return verbs;
+  if (!words) throw new Error("words is required");
+  const verbs = [];
+  words.forEach(function (item) {
+    if (item.startsWith("to ")) {
+      verbs.push(item);
+    }
+  });
+  return verbs;
 }
 
-export function getIntegers(nums) {
-	if (!nums) throw new Error('nums is required');
-	// Your code here
-	const intArray = [];
-	for(let i=0;i<nums.length;i++){
-		if(Number.isInteger(nums[i])){
-			intArray.push(nums[i]);
-		}
-	}
-	return intArray;
+export function getIntegers(numbers) {
+  if (!numbers) throw new Error("nums is required");
+  const intArray = [];
+  numbers.forEach(function (num) {
+    if (Number.isInteger(num)) {
+      intArray.push(num);
+    }
+  });
+  return intArray;
 }
 
 export function getCities(users) {
-	if (!users) throw new Error('users is required');
-	// Your code here
-	const cities = [];
-	for(let i=0;i<users.length;i++){
-		cities.push(users[i].data.city.displayName);
-	}
-	return cities;
+  if (!users) throw new Error("users is required");
+  const cities = [];
+  users.forEach(function (user) {
+    cities.push(user.data.city.displayName);
+  });
+  
+  return cities;
 }
 
-export function getSquareRoots(nums) {
-	if (!nums) throw new Error('nums is required');
-	// Your code here
-	const squareRoots = [];
-	let sqRoot = 0;
-	for(let i=0;i<nums.length;i++){
-		if(nums[i]>0){
-			sqRoot = Math.sqrt(nums[i]);
-			if(Number.isInteger(sqRoot)){
-				squareRoots.push(sqRoot);
-			}else{
-				squareRoots.push(parseFloat(sqRoot.toFixed(2)));
-			}
-		}
-	}
-	return squareRoots;
+export function getSquareRoots(numbers) {
+  if (!numbers) throw new Error("nums is required");
+  const squareRoots = [];
+  let sqRoot = 0;
+  numbers.forEach(function (num) {
+    if (num > 0) {
+      sqRoot = Math.sqrt(num);
+      if (Number.isInteger(sqRoot)) {
+        squareRoots.push(sqRoot);
+      } else {
+        squareRoots.push(parseFloat(sqRoot.toFixed(2)));
+      }
+    }
+  });
+  return squareRoots;
 }
 
 export function findSentencesContaining(sentences, str) {
-	if (!sentences) throw new Error('sentences is required');
-	if (!str) throw new Error('str is required');
-	// Your code here
-	let sentenceContainingStr = [];
-	if(typeof str !== 'number'){
-		for(let i=0;i<sentences.length;i++){
-			if(sentences[i].toLowerCase().includes(str.toLowerCase())){
-				sentenceContainingStr.push(sentences[i]);
-			}
-		}
-	}
-	return sentenceContainingStr;
+  if (!sentences) throw new Error("sentences is required");
+  if (!str) throw new Error("str is required");
+  let sentenceContainingStr = [];
+  sentences.forEach(function (sentence) {
+    if (sentence.toLowerCase().includes(str.toLowerCase())) {
+      sentenceContainingStr.push(sentence);
+    }
+  });
+  return sentenceContainingStr;
 }
 
 export function getLongestSides(triangles) {
-	if (!triangles) throw new Error('triangles is required');
-	// Your code here
-	const longestSides = [];
-	let max=0;
-	for(let i=0;i<triangles.length;i++){
-		max = 0;
-		for(let j=0;j<triangles[i].length;j++){
-			//loop through each set
-			if(triangles[i][j] > max){
-				max = triangles[i][j];
-			}
-		}
-		longestSides.push(max);
-	}
-	return longestSides;
+  if (!triangles) throw new Error("triangles is required");
+  const longestSides = [];
+  let max = 0;
+  triangles.forEach(function (triangle) {
+    max = 0;
+    triangle.forEach(function (side) {
+      if (side > max) {
+        max = side;
+      }
+    });
+    longestSides.push(max);
+  });
+    return longestSides;
 }
