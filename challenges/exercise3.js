@@ -61,7 +61,6 @@ export function getCities(users) {
 export function getSquareRoots(nums) {
 	if (!nums) throw new Error('nums is required');
 	// Your code here
-	//console.log("orig arr:"+nums);
 	const squareRoots = [];
 	let sqRoot = 0;
 	for(let i=0;i<nums.length;i++){
@@ -74,9 +73,6 @@ export function getSquareRoots(nums) {
 			}
 		}
 	}
-	//console.log('sqrt arr:'+squareRoots);
-
-			
 	return squareRoots;
 }
 
