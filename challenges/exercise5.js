@@ -1,17 +1,19 @@
-/* 
-⚠️
-⚠️ See exercise5.md - this time you have to write your own tests! ⚠️
-⚠️
-*/
-
 /**
  * This function will receive an array of numbers and should return the sum
  * of any numbers which are a multiple of 3 or 5
  * @param {Array} arr
  * @returns {Number}
  */
-export const sumMultiples = (arr) => {
-	if (arr === undefined) throw new Error('arr is required');
+export const sumMultiples = (numberArray) => {
+  if (numberArray === undefined) throw new Error("Array is required");
+  if (!Array.isArray(numberArray)) throw new Error("Array is required");
+  const sumOfMultiples = numberArray.reduce((sum, number) => {
+    if (number % 3 === 0 || number % 5 === 0) {
+      return sum + number;
+    }
+    return sum;
+  }, 0);
+  return sumOfMultiples;
 };
 
 /**
@@ -19,8 +21,9 @@ export const sumMultiples = (arr) => {
  * @param {String} str
  * @returns {Boolean}
  */
-export const isValidDNA = (str) => {
-	if (str === undefined) throw new Error('str is required');
+export const isValidDNA = (dnaString) => {
+  if (dnaString === undefined) throw new Error("str is required");
+  return /^[cgtaCGTA]+$/.test(dnaString);
 };
 
 /**
@@ -28,8 +31,17 @@ export const isValidDNA = (str) => {
  * @param {String} str
  * @returns {String}
  */
-export const getComplementaryDNA = (str) => {
-	if (str === undefined) throw new Error('str is required');
+export const getComplementaryDNA = (dnaString) => {
+  if (dnaString === undefined) throw new Error("String is required");
+  if (!isValidDNA(dnaString)) throw new Error("String is not a valid DNA");
+
+  const complementaryObj = { T: "A", C: "G", A: "T", G: "C" };
+  const strArray = dnaString.split("");
+  let complementaryStr = "";
+  strArray.forEach((letter) => {
+    complementaryStr += complementaryObj[letter.toUpperCase()];
+  });
+  return complementaryStr;
 };
 
 /**
@@ -37,8 +49,23 @@ export const getComplementaryDNA = (str) => {
  * @param {Number} n
  * @returns {Boolean}
  */
-export const isItPrime = (n) => {
-	if (n === undefined) throw new Error('n is required');
+export const isItPrime = (number) => {
+  if (number === undefined) throw new Error("number is required");
+  let isPrime = true;
+  if (number <= 1) {
+    return false;
+  }
+  if (number <= 3) {
+    return true;
+  }
+  const numSqrt = Math.sqrt(number);
+  for (let i = 2; i <= numSqrt; i++) {
+    if (number % i === 0) {
+      isPrime = false;
+      break;
+    }
+  }
+  return isPrime;
 };
 
 /**
@@ -52,9 +79,12 @@ export const isItPrime = (n) => {
  * @param {Any} fill
  * @returns {Array}
  */
-export const createMatrix = (n, fill) => {
-	if (n === undefined) throw new Error('n is required');
-	if (fill === undefined) throw new Error('fill is required');
+export const createMatrix = (arrLength, fillString) => {
+  if (arrLength === undefined) throw new Error("number is required");
+  if (fillString === undefined || fillString === '') throw new Error("fill string is required");
+  const innerArray = new Array(arrLength).fill(fillString);
+  const outerArray = new Array(arrLength).fill(innerArray);
+  return outerArray;
 };
 
 /**
@@ -65,11 +95,22 @@ export const createMatrix = (n, fill) => {
  *  ...etc
  * ]
  * and a day of the week. For the café to run successfully, at least 3 staff members are required per day. The function should return true/false depending on whether there are enough staff scheduled for the given day.
- * @param {Array} staff
+ * @param {Array} staffObjArray
  * @param {String} day
  * @returns {Boolean}
  */
-export const areWeCovered = (staff, day) => {
-	if (staff === undefined) throw new Error('staff is required');
-	if (day === undefined) throw new Error('day is required');
+export const areWeCovered = (staffObjArray, day) => {
+  if (staffObjArray === undefined) throw new Error("staff is required");
+  if (day === undefined) throw new Error("day is required");
+  let staffCount = 0;
+  staffObjArray.forEach((obj) => {
+    if (obj.rota !== undefined) {
+      obj.rota.forEach((staffDays) => {
+        if (staffDays.toLowerCase() === day.toLowerCase()) {
+          staffCount++;
+        }
+      });
+    }
+  });
+  return staffCount >= 3 ? true : false;
 };
