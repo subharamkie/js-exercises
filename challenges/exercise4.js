@@ -9,39 +9,72 @@ export const findNextNumber = (numbers, number) => {
 
 export const count1sand0s = (binaryStr) => {
   if (binaryStr === undefined) throw new Error("Binary string is required");
-  const strArray = binaryStr.split('');
-  let binaryCount = {};
-  strArray.forEach((char) => {
-    if (binaryCount.char === undefined) {
-      binaryCount.char = 1;
+  const strArray = binaryStr.split("");
+  const binaryCountObj = { 1: 0, 0: 0 };
+  strArray.forEach((item) => {
+    if (binaryCountObj[Number(item)] === undefined) {
+      binaryCountObj[Number(item)] = 1;
     } else {
-      binaryCount.char += 1;
+      binaryCountObj[Number(item)] += 1;
     }
   });
-  console.log("obj:"+binaryCount);
-  return binaryCount;
+  return binaryCountObj;
 };
 
-export const reverseNumber = (n) => {
-  if (n === undefined) throw new Error("n is required");
+export const reverseNumber = (number) => {
+  if (number === undefined) throw new Error("n is required");
+  const numberArray = Math.abs(number).toString().split("");
+  let reversedNumber = "";
+  numberArray.forEach((digit) => {
+    reversedNumber = digit + reversedNumber;
+  });
+  return number < 0 ? -Number(reversedNumber) : Number(reversedNumber);
 };
 
-export const sumArrays = (arrs) => {
-  if (arrs === undefined) throw new Error("arrs is required");
+export const sumArrays = (array) => {
+  if (array === undefined) throw new Error("arrs is required");
+  const sumOfArrays = array
+    .map((numberArray) => numberArray.reduce((sum, number) => sum + number, 0))
+    .reduce((finalSum, arraySum) => finalSum + arraySum, 0);
+  return sumOfArrays;
 };
 
-export const arrShift = (arr) => {
-  if (arr === undefined) throw new Error("arr is required");
-  // Your code here!
+export const arrShift = (array) => {
+  if (array === undefined) throw new Error("arr is required");
+  if (array.length < 2) return array;
+  const tmpVar = array[0];
+  const length = array.length;
+  array[0] = array[length - 1];
+  array[length - 1] = tmpVar;
+  return array;
 };
 
 export const findNeedle = (haystack, searchTerm) => {
   if (haystack === undefined) throw new Error("haystack is required");
   if (searchTerm === undefined) throw new Error("searchTerm is required");
-  // Your code here!
+  const values = Object.values(haystack);
+  let containsFlag = false;
+  values.forEach((value) => {
+    if (value.toString().toLowerCase().includes(searchTerm.toLowerCase())) {
+      containsFlag = true;
+    }
+  });
+  return containsFlag;
 };
 
-export const getWordFrequencies = (str) => {
-  if (str === undefined) throw new Error("str is required");
-  // Your code here!
+export const getWordFrequencies = (string) => {
+  if (string === undefined) throw new Error("str is required");
+  const stringWithoutSplChar = string
+    .replace(/[^a-zA-Z0-9 ]/g, "")
+    .toLowerCase();
+  const strArray = stringWithoutSplChar.split(" ");
+  let frequencyObj = {};
+  strArray.forEach((word) => {
+    if (frequencyObj[word] === undefined) {
+      frequencyObj[word] = 1;
+    } else {
+      frequencyObj[word] += 1;
+    }
+  });
+  return frequencyObj;
 };
