@@ -7,6 +7,10 @@ import {
 } from '../challenges/exercise1';
 
 describe('getFillings', () => {
+	test('Throws error if object is not passed',() =>{
+		expect(()=>{getFillings();}).toThrow('ingredients is required');
+	});
+	
 	test('returns the fillings of a sandwich', () => {
 		const sandwich = {
 			bread: 'Sourdough',
@@ -25,6 +29,10 @@ describe('getFillings', () => {
 });
 
 describe('isFromManchester', () => {
+	test('Throws error if object is not passed',() =>{
+		expect(()=>{isFromManchester();}).toThrow('person is required');
+	});
+	
 	test('returns true if the person is from Manchester', () => {
 		const person = {
 			name: 'Mohammed',
@@ -46,6 +54,9 @@ describe('isFromManchester', () => {
 
 describe('getBusNumbers', () => {
 	// A bus can hold 40 people. This function should return how many buses are required for the number of people
+	test('Throws error if not passed a number',() =>{
+		expect(()=>{getBusNumbers();}).toThrow('people is required');
+	});
 	test('returns 1 if all the people fit in 1 bus', () => {
 		expect(getBusNumbers(1)).toBe(1);
 		expect(getBusNumbers(10)).toBe(1);
@@ -74,6 +85,9 @@ describe('getBusNumbers', () => {
 });
 
 describe('countSheep', () => {
+	test('Throw error if array is not passed', () => {
+		expect(()=>{countSheep();}).toThrow('array is required');
+	});
 	test('returns 0 if there are 0 sheep in the array', () => {
 		const arr = ['dog', 'badger', 'dog', 'dog', 'chicken'];
 		expect(countSheep(arr)).toBe(0);
@@ -88,6 +102,11 @@ describe('countSheep', () => {
 		const arr = ['dog', 'sheep', 'dog', 'sheep', 'chicken'];
 		expect(countSheep(arr)).toBe(2);
 	});
+	test('returns 2 if there are 2 sheep(case insensitive) in the array', () => {
+		const arr = ['dog', 'sheep', 'dog', 'Sheep', 'chicken'];
+		expect(countSheep(arr)).toBe(2);
+	});
+
 
 	test('returns 5 if there are 5 sheep in the array', () => {
 		const arr = [
@@ -114,6 +133,19 @@ describe('hasMPostCode', () => {
 				line1: '1a Pool Road',
 				city: 'Manchester',
 				postCode: 'M16 8DR',
+			},
+		};
+		expect(hasMPostCode(person)).toBe(true);
+	});
+
+	test('returns true if the person has a postcode starting with m(lower case)', () => {
+		const person = {
+			name: 'Mohammed',
+			age: 23,
+			address: {
+				line1: '1a Pool Road',
+				city: 'Manchester',
+				postCode: 'm16 8dr',
 			},
 		};
 		expect(hasMPostCode(person)).toBe(true);
