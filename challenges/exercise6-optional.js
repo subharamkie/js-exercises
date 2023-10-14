@@ -1,13 +1,18 @@
-/* 
-	👉 These exercises are a great extra challenge to push your JavaScript skills. Go for it!
-*/
-
 /**
  * This function takes a number, e.g. 123 and returns the sum of all its digits, e.g 6 in this example.
- * @param {Number} n
+ * @param {Number} number
  */
-export const sumDigits = (n) => {
-	if (n === undefined) throw new Error('n is required');
+export const sumDigits = (number) => {
+  if (number === undefined) throw new Error("number is required");
+  let quotient = Math.floor(number);
+  let remainder = 0;
+  let sumOfDigits = 0;
+  while (quotient > 0) {
+    remainder = quotient % 10;
+    quotient = Math.floor(quotient / 10);
+    sumOfDigits += remainder;
+  }
+  return sumOfDigits;
 };
 
 /**
@@ -19,12 +24,22 @@ export const sumDigits = (n) => {
  * @param {Number} step
  */
 export const createRange = (start, end, step) => {
-	if (start === undefined) throw new Error('start is required');
-	if (end === undefined) throw new Error('end is required');
-	if (step === undefined)
-		console.log(
-			"FYI: Optional step parameter not provided. Remove this check once you've handled the optional step!"
-		);
+  if (start === undefined) throw new Error("starting number is required");
+  if (end === undefined) throw new Error("ending number is required");
+  if (step === undefined) {
+    step = 1;
+  }
+  const arrayLength = Math.floor((end - start) / step) + 1;
+  let rangeArray = [];
+  let element = start;
+  while (element <= end) {
+    rangeArray.push(element);
+    element += step;
+  }
+  if (rangeArray[arrayLength - 1] !== end) {
+    rangeArray.push(end);
+  }
+  return rangeArray;
 };
 
 /**
@@ -57,8 +72,32 @@ export const createRange = (start, end, step) => {
  * @param {Array} users
  */
 export const getScreentimeAlertList = (users, date) => {
-	if (users === undefined) throw new Error('users is required');
-	if (date === undefined) throw new Error('date is required');
+  if (users === undefined) throw new Error("users is required");
+  if (date === undefined) throw new Error("date is required");
+  let userNameArray = [];
+  let screenTimeTotal = 0;
+  users.forEach((user) => {
+    //check if user has data for the particular day
+    let filteredArray = filterScreenTimeByDate(user.screenTime, date);
+    if (filteredArray.length === 1) {
+      //calculate total screentime for that day
+      screenTimeTotal = calcTotalScreenTime(filteredArray[0]);
+      if (screenTimeTotal > 100) {
+        userNameArray.push(user.username);
+      }
+    }
+  });
+  return userNameArray;
+};
+const filterScreenTimeByDate = (dailyUsageStatsArray, dateOfInterest) => {
+  const array = dailyUsageStatsArray.filter(
+    (obj) => obj.date === dateOfInterest
+  );
+  return array;
+};
+
+const calcTotalScreenTime = (usageObj) => {
+  return Object.values(usageObj.usage).reduce((sum, value) => sum + value, 0);
 };
 
 /**
@@ -72,7 +111,13 @@ export const getScreentimeAlertList = (users, date) => {
  * @param {String} str
  */
 export const hexToRGB = (hexStr) => {
-	if (hexStr === undefined) throw new Error('hexStr is required');
+  if (hexStr === undefined) throw new Error("hexStr is required");
+  if(!/^#[0-9a-fA-F]{6}$/.test(hexStr)) throw new Error("Pass valid Hex string");
+    const redDecimal = parseInt(hexStr.slice(1, 3),16);
+    const greenDecimal = parseInt(hexStr.slice(3, 5),16);
+    const blueDecimal = parseInt(hexStr.slice(5, 7),16);
+    return `RGB(${redDecimal},${greenDecimal},${blueDecimal})`;
+  
 };
 
 /**
@@ -86,5 +131,5 @@ export const hexToRGB = (hexStr) => {
  * @param {Array} board
  */
 export const findWinner = (board) => {
-	if (board === undefined) throw new Error('board is required');
+  if (board === undefined) throw new Error("board is required");
 };
