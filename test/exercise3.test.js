@@ -16,9 +16,27 @@ describe("findSmallNums", () => {
     expect(findSmallNums([100, 88])).toEqual([]);
     expect(findSmallNums([])).toEqual([]);
   });
+  test("Error if argument is not passed", () => {
+    expect(() => {
+      findSmallNums();
+    }).toThrow("Number array is required");
+  });
 });
 
 describe("findNamesBeginningWith", () => {
+  test("Error if array is not passed", () => {
+    expect(() => {
+      findNamesBeginningWith();
+    }).toThrow("Names array is required");
+  });
+  test("Error if character is not passed", () => {
+    const names = ["Sally", "Dave", "Susan", "Geoff", "Riley", "Sam"];
+
+    expect(() => {
+      findNamesBeginningWith(names);
+    }).toThrow("Character is required");
+  });
+
   test("returns an array of names beginning with the specified character", () => {
     const names = ["Sally", "Dave", "Susan", "Geoff", "Riley", "Sam"];
     expect(findNamesBeginningWith(names, "S")).toEqual([
@@ -28,10 +46,18 @@ describe("findNamesBeginningWith", () => {
     ]);
     expect(findNamesBeginningWith(names, "D")).toEqual(["Dave"]);
     expect(findNamesBeginningWith(names, "F")).toEqual([]);
+    expect(() => {
+      findNamesBeginningWith(names, "");
+    }).toThrow("Character is required");
   });
 });
 
 describe("findVerbs", () => {
+  test("Errors if array is not passed", () => {
+    expect(() => {
+      findVerbs();
+    }).toThrow("Words array is required");
+  });
   test("returns an array of words that are considered verbs (because they begin with 'to ')", () => {
     const words = [
       "to eat",
@@ -59,6 +85,11 @@ describe("findVerbs", () => {
 });
 
 describe("getIntegers", () => {
+  test("Error if array is not passed", () => {
+    expect(() => {
+      getIntegers();
+    }).toThrow("Number array is required");
+  });
   test("returns an array containing only integers", () => {
     const nums = [1, 3.5, 2.1, 1, 4, 9];
     expect(getIntegers(nums)).toEqual([1, 1, 4, 9]);
@@ -68,6 +99,11 @@ describe("getIntegers", () => {
 });
 
 describe("getCities", () => {
+  test("Error if argument is not passed", () => {
+    expect(() => {
+      getCities();
+    }).toThrow("Users array is required");
+  });
   test("returns an array of the cities of each user", () => {
     const users = [
       {
@@ -112,6 +148,11 @@ describe("getCities", () => {
 });
 
 describe("getSquareRoots", () => {
+  test("Error if array is not passed", () => {
+    expect(() => {
+      getSquareRoots();
+    }).toThrow("Number array is required");
+  });
   test("gets the square root of each number to 2 decimal places", () => {
     const nums = [36, 77, 12, 355, 92, 5];
     expect(getSquareRoots(nums)).toEqual([6, 8.77, 3.46, 18.84, 9.59, 2.24]);
@@ -152,6 +193,16 @@ describe("findSentencesContaining", () => {
       "It's best to map these additional items such as a test framework, which is not needed for running your project, in a devDependencies object",
     ]);
   });
+  test("Error if arguments are not passed", () => {
+    expect(() => {
+      findSentencesContaining();
+    }).toThrow("Sentences are required");
+  });
+  test("Error if word to match is not passed", () => {
+    expect(() => {
+      findSentencesContaining(sentencesAboutPackageJson);
+    }).toThrow("Word to match is required");
+  });
 });
 
 describe("getLongestSides", () => {
@@ -173,5 +224,15 @@ describe("getLongestSides", () => {
       [7, 12, 8],
     ];
     expect(getLongestSides(data2)).toEqual([7, 9, 6, 13, 12]);
+    
+  });
+  test('Error if array is empty',() =>{
+    expect(() => {getLongestSides([]);}).toThrow("Triangles array is required");
+  });
+  
+  test("Error if argument is not passed", () => {
+    expect(() => {
+      getLongestSides();
+    }).toThrow("Triangles array is required");
   });
 });
