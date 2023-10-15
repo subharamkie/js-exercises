@@ -26,6 +26,13 @@ describe('findNextNumber', () => {
 	test('if the number is found in the final index position of the array, returns null', () => {
 		expect(findNextNumber([5, 3, 7, 8, 1, 3, 10], 10)).toBe(null);
 	});
+	test('Error if numbers array is not passed', () => {
+		expect(()=>{findNextNumber()}).toThrow('Number array is required');
+	});
+	test('Error if number to find is not passed', () => {
+		expect(()=>{findNextNumber([2,4,6,7,9])}).toThrow('Number to find is required');
+	});
+
 });
 
 describe('count1sand0s', () => {
@@ -50,6 +57,12 @@ describe('count1sand0s', () => {
 			0: 1,
 		});
 	});
+	test('Error if argument is not passed',()=>{
+		expect(()=>{count1sand0s()}).toThrow('Non empty binary string is required');
+	});
+	test('Error if str is empty',()=>{
+		expect(()=>{count1sand0s()}).toThrow('Non empty binary string is required');
+	});
 });
 
 describe('reverseNumber', () => {
@@ -60,13 +73,21 @@ describe('reverseNumber', () => {
 		expect(reverseNumber(-1234)).toBe(-4321);
 		expect(reverseNumber(100)).toBe(1); // No leading 0 necessary
 	});
+	test('Error if number is not passed',()=>{
+		expect(() => {reverseNumber();}).toThrow('Number is required');
+	});
 });
 
 
 describe('sumArrays', () => {
 	test('returns the total of the numbers in all sub arrays', () => {
 		const arrs = [[1, 2, 3], [6, 3, 1], [1], [9, 10], [3, 5]];
+		const arr1 = [[5,78,9],[],[34,57,21]];
 		expect(sumArrays(arrs)).toBe(44);
+		expect(sumArrays(arr1)).toBe(204);
+	});
+	test('Error if arguments are not passed',()=>{
+		expect(()=>{sumArrays();}).toThrow('Array of number arrays is required');
 	});
 });
 
@@ -80,6 +101,10 @@ describe('arrShift', () => {
 	test('makes no difference when the array length is < 2', () => {
 		expect(arrShift([1])).toEqual([1]);
 		expect(arrShift([])).toEqual([]);
+	});
+
+	test('Error if array is passed',()=>{
+		expect(()=>{arrShift()}).toThrow('Array is required');
 	});
 });
 
@@ -139,6 +164,21 @@ describe('findNeedle', () => {
 		expect(findNeedle(obj1, 'linnmon')).toBe(true);
 		expect(findNeedle(obj1, 'Liverpool')).toBe(false);
 	});
+
+	test('Error if argument is not passed',()=>{
+		expect(()=>{findNeedle();}).toThrow('Haystack is required');
+	});
+	test('Error if argument is not passed',()=>{
+		const obj1 = {
+			name: 'LINNMON',
+			description: 'Small round table',
+			price: 31.89,
+			store: 'Warrington',
+			code: 12872,
+		};
+		expect(()=>{findNeedle(obj1);}).toThrow('searchTerm is required');
+		expect(()=>{findNeedle(obj1,'');}).toThrow('searchTerm is required');
+	});
 });
 
 describe('getWordFrequencies', () => {
@@ -179,5 +219,12 @@ describe('getWordFrequencies', () => {
 			we: 1,
 			here: 1,
 		});
+	});
+
+	test('Error if argument is not passed',()=>{
+		expect(()=>{getWordFrequencies();}).toThrow('Non empty string is required');
+	});
+	test('Error if string is empty',()=>{
+		expect(()=>{getWordFrequencies('');}).toThrow('Non empty string is required');
 	});
 });
