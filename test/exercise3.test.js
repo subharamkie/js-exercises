@@ -224,12 +224,13 @@ describe("getLongestSides", () => {
       [7, 12, 8],
     ];
     expect(getLongestSides(data2)).toEqual([7, 9, 6, 13, 12]);
-    
   });
-  test('Error if array is empty',() =>{
-    expect(() => {getLongestSides([]);}).toThrow("Triangles array is required");
+  test("Error if array is empty", () => {
+    expect(() => {
+      getLongestSides([]);
+    }).toThrow("Triangles array is required");
   });
-  
+
   test("Error if argument is not passed", () => {
     expect(() => {
       getLongestSides();
