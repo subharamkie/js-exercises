@@ -7,7 +7,7 @@ export function getSquares(numArray) {
 
 export function camelCaseWords(words) {
   if (words === undefined) throw new Error("word(s) is required");
-  if(words === "") return "";
+  if (words === "") return "";
   let camelCaseWord = words[0];
   if (words.length === 1) {
     return camelCaseWord;
@@ -19,7 +19,8 @@ export function camelCaseWords(words) {
 }
 
 export function getTotalSubjects(people) {
-  if (people === undefined) throw new Error("Array of people objects is required");
+  if (people === undefined)
+    throw new Error("Array of people objects is required");
 
   const subjCount = people.reduce(
     (sum, person) => sum + person.subjects.length,
@@ -37,8 +38,10 @@ export function checkIngredients(menu, ingredient) {
 }
 
 export function duplicateNumbers(array1, array2) {
-  if (array1 === undefined|| array1.length === 0) throw new Error("Arrays are required");
-  if (array2 === undefined || array2.length === 0) throw new Error("Second array is required");
+  if (array1 === undefined || array1.length === 0)
+    throw new Error("Arrays are required");
+  if (array2 === undefined || array2.length === 0)
+    throw new Error("Second array is required");
   let newArray = [];
   for (let i = 0; i < array1.length; i++) {
     if (array2.indexOf(array1[i]) >= 0 && newArray.indexOf(array1[i]) === -1) {
