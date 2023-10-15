@@ -7,6 +7,13 @@ import {
 } from '../challenges/exercise2';
 
 describe('camelCaseWords', () => {
+	test('Throw error if no word is passed', () => {
+		expect(()=> {
+			camelCaseWords();}).toThrow("word(s) is required");
+	});
+	test('Empty string if empty string is passed', () => {
+		expect(camelCaseWords("")).toBe("");
+	});
 	test('camel cases a single word (i.e. no capital letter at beginning)', () => {
 		expect(camelCaseWords(['my'])).toBe('my');
 	});
@@ -33,6 +40,7 @@ describe('getSquares', () => {
 	});
 
 	test('returns an array of squares of the original numbers', () => {
+		expect(getSquares([2])).toEqual([4]);
 		expect(getSquares([2, 4, 6])).toEqual([4, 16, 36]);
 		expect(getSquares([2, 4, 6, 1])).toEqual([4, 16, 36, 1]);
 		expect(getSquares([2, 3, 6, 7, 12, 4])).toEqual([
@@ -45,6 +53,10 @@ describe('getSquares', () => {
 });
 
 describe('getTotalSubjects', () => {
+	test('Throws an error if no argument is passed',()=>{
+		expect(()=>{
+			getTotalSubjects();}).toThrow('Array of people objects is required');
+		});
 	test('returns 0 if no people have subjects', () => {
 		const people = [
 			{ name: 'Billy', subjects: [] },
@@ -77,6 +89,39 @@ describe('getTotalSubjects', () => {
 });
 
 describe('checkIngredients', () => {
+	test('Throw error if no arguments are passed',()=>{
+		expect(() => {
+			checkIngredients();}).toThrow('Menu object is required');
+		});
+		test('Throw error if no ingrdient is passed',()=>{
+			const menu = [
+				{
+					name: 'tofu fritters',
+					ingredients: ['tofu', 'egg yolk', 'breadbrumbs', 'paprika'],
+				},
+				{
+					name: 'black bean curry',
+					ingredients: ['black beans', 'garam masala', 'rice'],
+				},
+				{
+					name: 'chocolate tiffin',
+					ingredients: [
+						'dark chocolate',
+						'egg',
+						'flour',
+						'brown sugar',
+						'vanilla essence',
+					],
+				},
+				{
+					name: 'hummus',
+					ingredients: ['chickpeas', 'tahini', 'lemon', 'garlic', 'salt'],
+				},
+			];
+			expect(() => {
+				checkIngredients(menu);}).toThrow('Ingredient to check is required');
+			});
+	
 	test('returns false if no menu items include the specified ingredient', () => {
 		const menu = [
 			{
@@ -137,6 +182,27 @@ describe('checkIngredients', () => {
 });
 
 describe('duplicateNumbers', () => {
+	test('Error if arrays are not passed as argument',()=>{
+		expect(()=>{
+			duplicateNumbers();}).toThrow('Arrays are required');
+	});
+	test('Error if second array is not passed as argument',()=>{
+		let arr1 = [1, 55, 4, 3, 7, 8];
+		
+		expect(()=>{
+			duplicateNumbers(arr1);}).toThrow('Second array is required');
+	});
+	test('Error if array is empty',()=>{
+		expect(()=>{
+			duplicateNumbers([]);}).toThrow('Arrays are required');
+	});
+	test('Error if second array is empty',()=>{
+		let arr1 = [1, 55, 4, 3, 7, 8];
+		
+		expect(()=>{
+			duplicateNumbers(arr1,[]);}).toThrow('Second array is required');
+	});
+	
 	test('returns an array of numbers which appear in both arr1 and arr2', () => {
 		let arr1 = [1, 55, 4, 3, 7, 8];
 		let arr2 = [55, 23, 65, 0];
